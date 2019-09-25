@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+    <style>
+        li.nav-item {
+            text-color: white;
+            color: white;
+        }
+        .signup-box {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark navbar-expand bg-dark">
+        <a class="navbar-brand" href="index.html">Home</a>
+
+        <div class="navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<div class="container-fluid jumbotron text-center" style="padding:2%;">
+    <h1>Sign Up</h1>
+</div>
+
+<form class="container signup-box align-content-center" style="padding-top: 2%;">
+    <div class="form-group row">
+
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="firstNameInput" placeholder="First Name"/>
+        </div>
+
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name"/>
+        </div>
+    </div>
+    <div class="row" id="confirmFirstNameError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter first name.</div>
+            </span>
+        </div>
+    </div>
+    <div class="row" id="confirmLastNameError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter last name.</div>
+            </span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input type="email" class="form-control" id="emailInput" placeholder="email@example.com">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Confirm Password">
+        </div>
+    </div>
+    <div class="align-content-center justify-content-center container d-flex">
+        <input type="button" class="btn btn-primary" onclick="submitSignup()" value="Sign Up"/>
+    </div>
+</form>
+
+
+<script>
+    function submitSignup() {
+        if (checkFirstName()) {
+
+        }
+    }
+
+    document.getElementById("firstNameInput").onkeyup = function() {
+        checkFirstName();
+    }
+
+    function checkFirstName() {
+        if (document.getElementById("firstNameInput").value == "") {
+            document.getElementById("confirmFirstNameError").hidden = false;
+            return false;
+        }
+        document.getElementById("confirmFirstNameError").hidden = true;
+        return true;
+    }
+</script>
+
+
+
+</body>
+</html>
