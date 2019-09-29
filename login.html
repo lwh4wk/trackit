@@ -5,10 +5,14 @@
     <title>Login</title>
     <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
 
+
     <style>
         li.nav-item {
             text-color: white;
             color: white;
+        }
+        .login-box {
+            width: 20%;
         }
     </style>
 </head>
@@ -29,8 +33,80 @@
 </header>
 
 
-<div class="container-fluid jumbotron text-center">
+<div class="container-fluid jumbotron text-center" style="padding:2%;">
     <h1>Login</h1>
 </div>
+
+<form class="container login-box align-content-center" style="padding-top: 2%;">
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input type="text" class="form-control" id="userInput" placeholder="Username">
+        </div>
+    </div>
+    <div class="row" id="usernameError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter your username.</div>
+            </span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+        </div>
+    </div>
+    <div class="row" id="passwordError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter your password.</div>
+            </span>
+        </div>
+    </div>
+
+    <div class="align-content-center justify-content-center container d-flex">
+        <input type="button" class="btn btn-primary" onclick="submitLogin()" value="Sign Up"/>
+    </div>
+    <div class="row" id="successMessage" style="padding-top: 2%;" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-success" role="alert">Successfully Submitted.</div>
+            </span>
+        </div>
+    </div>
+</form>
+
+<script>
+    function submitLogin() {
+        document.getElementById("userInput").onkeyup = function() {
+            checkUser();
+        }
+        if (checkUser()) {
+            document.getElementById("passwordInput").onkeyup = function() {
+                checkPassword();
+            }
+            if (checkPassword()) {
+                document.getElementById("successMessage").hidden = false;
+            }
+        }
+    }
+
+    function checkUser() {
+        if (document.getElementById("userInput").value == "") {
+            document.getElementById("usernameError").hidden = false;
+            return false;
+        }
+        document.getElementById("usernameError").hidden = true;
+        return true;
+    }
+
+    function checkPassword() {
+        if (document.getElementById("passwordInput").value == "") {
+            document.getElementById("passwordError").hidden = false;
+            return false;
+        }
+        document.getElementById("passwordError").hidden = true;
+        return true;
+    }
+</script>
 </body>
 </html>
