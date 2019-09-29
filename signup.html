@@ -66,9 +66,23 @@
             <input type="email" class="form-control" id="emailInput" placeholder="email@example.com">
         </div>
     </div>
+    <div class="row" id="confirmEmailError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter your email address.</div>
+            </span>
+        </div>
+    </div>
     <div class="form-group row">
         <div class="col-sm-12">
             <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+        </div>
+    </div>
+    <div class="row" id="passwordError" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please enter a password.</div>
+            </span>
         </div>
     </div>
     <div class="form-group row">
@@ -76,21 +90,66 @@
             <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Confirm Password">
         </div>
     </div>
+    <div class="row" id="confirmPasswordErrorEmpty" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Please confirm your password.</div>
+            </span>
+        </div>
+    </div>
+    <div class="row" id="confirmPasswordErrorMatch" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">The password you entered doesn't match the confirm password you entered.</div>
+            </span>
+        </div>
+    </div>
     <div class="align-content-center justify-content-center container d-flex">
         <input type="button" class="btn btn-primary" onclick="submitSignup()" value="Sign Up"/>
+    </div>
+    <div class="row" id="successMessage" style="padding-top: 2%;" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-success" role="alert">Successfully Submitted.</div>
+            </span>
+        </div>
     </div>
 </form>
 
 
 <script>
     function submitSignup() {
-        if (checkFirstName()) {
-
+        document.getElementById("firstNameInput").onkeyup = function() {
+            checkFirstName();
         }
-    }
-
-    document.getElementById("firstNameInput").onkeyup = function() {
-        checkFirstName();
+        if (checkFirstName()) {
+            document.getElementById("lastNameInput").onkeyup = function() {
+                checkLastName();
+            }
+            if (checkLastName()) {
+                document.getElementById("emailInput").onkeyup = function() {
+                    checkEmail();
+                }
+                if (checkEmail()) {
+                    document.getElementById("passwordInput").onkeyup = function() {
+                        checkPassword();
+                    }
+                    if (checkPassword()) {
+                        document.getElementById("confirmPasswordInput").onkeyup = function() {
+                            checkConfirmPasswordEmpty();
+                        }
+                        if (checkConfirmPasswordEmpty()) {
+                            document.getElementById("confirmPasswordInput").onkeyup = function() {
+                                checkConfirmPasswordMatch();
+                            }
+                            if (checkConfirmPasswordMatch()) {
+                                document.getElementById("successMessage").hidden = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     function checkFirstName() {
@@ -99,6 +158,51 @@
             return false;
         }
         document.getElementById("confirmFirstNameError").hidden = true;
+        return true;
+    }
+
+    function checkLastName() {
+        if (document.getElementById("lastNameInput").value == "") {
+            document.getElementById("confirmLastNameError").hidden = false;
+            return false;
+        }
+        document.getElementById("confirmLastNameError").hidden = true;
+        return true;
+    }
+
+    function checkEmail() {
+        if (document.getElementById("emailInput").value == "") {
+            document.getElementById("confirmEmailError").hidden = false;
+            return false;
+        }
+        document.getElementById("confirmEmailError").hidden = true;
+        return true;
+    }
+
+    function checkPassword() {
+        if (document.getElementById("passwordInput").value == "") {
+            document.getElementById("passwordError").hidden = false;
+            return false;
+        }
+        document.getElementById("passwordError").hidden = true;
+        return true;
+    }
+
+    function checkConfirmPasswordEmpty() {
+        if (document.getElementById("confirmPasswordInput").value == "") {
+            document.getElementById("confirmPasswordErrorEmpty").hidden = false;
+            return false;
+        }
+        document.getElementById("confirmPasswordErrorEmpty").hidden = true;
+        return true;
+    }
+
+    function checkConfirmPasswordMatch() {
+        if (document.getElementById("passwordInput").value != document.getElementById("confirmPasswordInput").value) {
+            document.getElementById("confirmPasswordErrorMatch").hidden = false;
+            return false;
+        }
+        document.getElementById("confirmPasswordErrorMatch").hidden = true;
         return true;
     }
 </script>
