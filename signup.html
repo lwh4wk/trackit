@@ -240,6 +240,25 @@
 
 
 <script>
+    function createAccount() {
+        let xhrAccount = new XMLHttpRequest();
+        xhrAccount.onload = function() {
+            if (xhrAccount.status == 200) {
+                document.getElementById("successMessage").hidden = false;
+            }
+        }
+
+        xhrAccount.open('POST', 'createAccount.php', true);
+        xhrAccount.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhrAccount.send("emailInput=" + document.getElementById("emailInput").value +
+                        "&passwordInput=" + document.getElementById("passwordInput").value +
+                        "&firstNameInput=" + document.getElementById("firstNameInput").value +
+                        "&lastNameInput=" + document.getElementById("lastNameInput").value +
+                        "&streetAddress=" + document.getElementById("streetAddress").value +
+                        "&city=" + document.getElementById("city").value +
+                        "&state=" + document.getElementById("state").value +
+                        "&zipcode=" + document.getElementById("zipcode").value);
+    }
     function submitSignup() {
         document.getElementById("firstNameInput").onkeyup = function() {
             checkFirstName();
@@ -285,7 +304,7 @@
                                                     checkZipFormat();
                                                 }
                                                 if (checkZipFormat()) {
-                                                    document.getElementById("successMessage").hidden = false;
+                                                    createAccount();
                                                 }
                                             }
                                         }
