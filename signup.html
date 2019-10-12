@@ -241,24 +241,43 @@
 
 <script>
     function createAccount() {
+        if (checkExistingUser(document.getElementById("emailInput"))) {
+            let xhrAccount = new XMLHttpRequest();
+            xhrAccount.onload = function() {
+                if (xhrAccount.status == 200) {
+                    document.getElementById("successMessage").hidden = false;
+                }
+            }
+
+            xhrAccount.open('POST', 'createAccount.php', true);
+            xhrAccount.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhrAccount.send("emailInput=" + document.getElementById("emailInput").value +
+                "&passwordInput=" + document.getElementById("passwordInput").value +
+                "&firstNameInput=" + document.getElementById("firstNameInput").value +
+                "&lastNameInput=" + document.getElementById("lastNameInput").value +
+                "&streetAddress=" + document.getElementById("streetAddress").value +
+                "&city=" + document.getElementById("city").value +
+                "&state=" + document.getElementById("state").value +
+                "&zipcode=" + document.getElementById("zipcode").value);
+        }
+    }
+
+    function checkExistingUser(email) {
         let xhrAccount = new XMLHttpRequest();
         xhrAccount.onload = function() {
             if (xhrAccount.status == 200) {
-                document.getElementById("successMessage").hidden = false;
+                if (xhrAccount.responseText == "true") {
+                    return true;
+                }
+                return false;
             }
         }
 
-        xhrAccount.open('POST', 'createAccount.php', true);
-        xhrAccount.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhrAccount.send("emailInput=" + document.getElementById("emailInput").value +
-                        "&passwordInput=" + document.getElementById("passwordInput").value +
-                        "&firstNameInput=" + document.getElementById("firstNameInput").value +
-                        "&lastNameInput=" + document.getElementById("lastNameInput").value +
-                        "&streetAddress=" + document.getElementById("streetAddress").value +
-                        "&city=" + document.getElementById("city").value +
-                        "&state=" + document.getElementById("state").value +
-                        "&zipcode=" + document.getElementById("zipcode").value);
+        xhrAccount.open('POST', 'checkExistingUser.php', true);
+        xhrAccount.setRequestHeader("Content-type", "application/x-www-form-urlcoded");
+        xhrAccount.send("emailInput=" + email);
     }
+
     function submitSignup() {
         document.getElementById("firstNameInput").onkeyup = function() {
             checkFirstName();
