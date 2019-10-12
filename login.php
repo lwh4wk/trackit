@@ -2,15 +2,16 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require("dbconnect.php");
     $email = htmlspecialchars($_POST['emailInput']);
-    $pwd = password_hash(htmlspecialchars($_POST['passwordInput']), PASSWORD_BCRYPT);
+    $pwd = htmlspecialchars($_POST['passwordInput']);
 
-    $sql = "SELECT password FROM users WHERE email=\"$email\"";
+    $sql = "SELECT password FROM users WHERE email='{" . $email . "}'";
     $statement = $db->prepare($sql);
     $statement->execute();
 
     if ($statement->rowCount() > 0) {
         $row = $statement->fetch();
-        if (password_verify($pwd,$row[0])) {
+        $pass = substr($row[0], 1, strlen($row[0]) - 2);
+        if (password_verify($pwd,$pass)) {
             $statement->closeCursor();
 
             session_start();
@@ -18,13 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user'] = $email;
 
             $_SESSION['time'] = $_SERVER['REQUEST_TIME'];
-
-            $sql = "SELECT fname FROM users WHERE email=\"$email\"";
-            $statement = $db->prepare($sql);
-            $statement->execute();
-            $row = $statement->fetch();
-            print_r($db->errorInfo());
-            //echo "true";
+            echo "<div class=\"form-group col-12\" style='padding-top: 3%;'>
+                    <span>
+                        <div class=\"alert alert-success\" role=\"alert\">Successfully Logged In.</div>
+                    </span>
+                    </div>";
         }
         else {
             echo "<div style=\"padding-top: 3%;\"><p class='alert alert-danger'>Username and password do not match our record.</p></div> <br/>";
@@ -32,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     else {
-        echo "<div style=\"padding-top: 3%;\"><p class='alert alert-danger'>There is no account associated with this email.</p></div> <br/>";
+        echo "<div style=\"padding-top: 3%;\"><p class='alert alert-danger'>There is no account associated with this email, please <a href='signup.html'>create an account</a>.</p></div> <br/>";
         $statement->closeCursor();
     }
 }

@@ -73,11 +73,7 @@
         <input type="button" class="btn btn-primary" onclick="submitLogin()" value="Login"/>
     </div>
     <div class="row" id="successMessage" style="padding-top: 2%;" hidden>
-        <div class="form-group col-12">
-            <span>
-                <div class="alert alert-success" role="alert">Successfully Submitted.</div>
-            </span>
-        </div>
+
     </div>
 </form>
 
@@ -86,12 +82,11 @@
         let xhrAccount = new XMLHttpRequest();
         xhrAccount.onload = function() {
             if (xhrAccount.status == 200) {
-                console.log(xhrAccount.responseText);
-                /*if (xhrAccount.responseText == "true") {
-                    document.getElementById("successMessage").hidden = false;
+                if (xhrAccount.responseText == "true") {
+                    document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
                 } else {
                     document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
-                }*/
+                }
             }
         }
 
