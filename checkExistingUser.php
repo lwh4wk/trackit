@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "SELECT * FROM user WHERE email=:em";
     $statement = $db->prepare($query);
-    $statement->bindValue(":em", $user);
+    $statement->bindValue(":em", "'{" . $user . "}'");
     $statement->execute();
 
     if ($statement->rowCount() > 0) {
