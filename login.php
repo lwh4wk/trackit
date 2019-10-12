@@ -1,10 +1,10 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require("dbconnect.php");
-    $user = htmlspecialchars($_POST['user']);
-    $pwd = htmlspecialchars($_POST['pwd']);
+    $email = htmlspecialchars($_POST['emailInput']);
+    $pwd = password_hash(htmlspecialchars($_POST['passwordInput']), PASSWORD_BCRYPT);
 
-    $sql = "select password from user where username=\"$user\"";
+    $sql = "SELECT password FROM users WHERE email=\"$email\"";
     $statement = $db->prepare($sql);
     $statement->execute();
 
@@ -15,16 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             session_start();
 
-            $_SESSION['user'] = $user;
+            $_SESSION['user'] = $email;
 
             $_SESSION['time'] = $_SERVER['REQUEST_TIME'];
 
-            $sql = "select fname from user where username=\"$user\"";
+            $sql = "SELECT fname FROM users WHERE email=\"$email\"";
             $statement = $db->prepare($sql);
             $statement->execute();
             $row = $statement->fetch();
-
-            echo "true";
+            print_r($db->errorInfo());
+            //echo "true";
         }
         else {
             echo "<div style=\"padding-top: 3%;\"><p class='alert alert-danger'>Username and password do not match our record.</p></div> <br/>";
