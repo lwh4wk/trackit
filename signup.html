@@ -265,7 +265,7 @@
         let xhrAccount = new XMLHttpRequest();
         xhrAccount.onload = function() {
             if (xhrAccount.status == 200) {
-                document.getElementById("successMessage").hidden = false;
+                window.location.href = "products.html";
             }
         }
 
