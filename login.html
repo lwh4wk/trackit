@@ -84,7 +84,7 @@
         xhrAccount.onload = function() {
             if (xhrAccount.status == 200) {
                 if (xhrAccount.responseText == "true") {
-                    document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
+                    window.location.href = "products.html";
                 } else {
                     document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
                 }

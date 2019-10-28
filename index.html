@@ -27,8 +27,31 @@
         }
     </style>
 
+    <script>
+        function checkUser() {
+            let xhrUser = new XMLHttpRequest();
+            xhrUser.onload = function() {
+                if (xhrUser.status == 200) {
+                    if (xhrUser.responseText == "true") {
+                        document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"contact.html\">Contact Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"products.html\">Products</a></li>" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\">Sign Out</a></li>";
+                    } else {
+                        document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"contact.html\">Contact Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"login.html\">Login</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"signup.html\">Sign Up</a></li>\n";
+                    }
+                }
+            }
+            xhrUser.open('GET', 'checkUser.php', true);
+            xhrUser.send();
+        }
+    </script>
+
 </head>
-<body>
+<body onload="checkUser()">
 <div class="main-container">
 <header>
     <nav class="navbar navbar-dark navbar-expand bg-dark">
@@ -37,7 +60,7 @@
         </h2>
 
         <div class="navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="navbar-list">
                 <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
