@@ -18,10 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pass = substr($row[0], 1, strlen($row[0]) - 2);
         if (password_verify($currentPassword, $pass)) {
             $statement->closeCursor();
-            $query = "UPDATE users SET password=:pwd WHERE user=:userName";
+            $query = "UPDATE users SET password='{" . password_hash($newPassword, PASSWORD_BCRYPT) . "}' WHERE user='{" . $user . "}'";
             $statement = $db->prepare($query);
-            $statement->bindValue(':userName', $user);
-            $statement->bindValue(':pwd', password_hash($newPassword, PASSWORD_BCRYPT));
             $statement->execute();
             $statement->closeCursor();
             echo "success";
