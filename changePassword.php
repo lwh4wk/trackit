@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pass = substr($row[0], 1, strlen($row[0]) - 2);
         if (password_verify($currentPassword, $pass)) {
             $statement->closeCursor();
-            $query = "UPDATE users SET password='{" . password_hash($newPassword, PASSWORD_BCRYPT) . "}' WHERE user='{" . $user . "}'";
+            $query = "UPDATE users SET password='{" . password_hash($newPassword, PASSWORD_BCRYPT) . "}' WHERE email='{" . $user . "}'";
             $statement = $db->prepare($query);
             $statement->execute();
             $statement->closeCursor();
