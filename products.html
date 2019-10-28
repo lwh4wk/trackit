@@ -33,11 +33,11 @@
         </h2>
         <div class="navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Products</a></li>
             </ul>
         </div>
     </nav>
@@ -57,14 +57,21 @@
         <br>
         <div class="row">
             <div class="col-6 align-content-center text-center">
-                <img class="small-img" src="img/extension.png" style="padding-top: 10%; padding-left: 5%;">
+                <img class="small-img" src="img/extension.png" style="padding-top: 10%;">
             </div>
             <div class="col-6 align-content-center text-center">
-                <img class="small-img" src="img/phone.png" style="padding-left: 5%;">
+                <img class="small-img" src="img/phone.png" style="">
             </div>
-
         </div>
-
+        <div class="text-center">
+        <form action="https://test.bitpay.com/checkout" method="post">
+            <input type="hidden" name="action" value="checkout" />
+            <input type="hidden" name="posData" value="" />
+            <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdxxkYCVg9+lKFwePybjtojs+94v40QqKlvAoMS4ozo79SHRQg+dTzuzZE5HTU8DUBRgF2uzyX6V2AB+WQcRNu+U1fnRaEfKh8VZzBrIhhDGM6foGj5GV1s7/J87VaMDYleyjJTdbFAJFEflyX1Gu1ka2sQacHQxYf4aV8YFjskRx3iWd9S18ujQkovJnZIPBKw=" />
+            <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
+        </form>
+        </div>
+        </div>
         <br>
         <hr>
         <h2 class="text-center" style="color: white;">The Basic Package</h2>
@@ -74,7 +81,15 @@
         <div class="align-content-center text-center">
             <img class="small-img" src="img/iphonedemo2.png" style="padding-left: 5%;"width="600">
         </div>
-        </div>
+        <br>
+    <div class="align-content-center text-center">
+        <form action="https://test.bitpay.com/checkout" method="post">
+            <input type="hidden" name="action" value="checkout" />
+            <input type="hidden" name="posData" value="" />
+            <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdzoWRBaHV1WweyqAFSCqgpkVe7ImR1GbVMRKZVidX4VmbqzlTX39s0hzzDWq2eBVLxPNPO7T6KscBQ4pZvPA04cQuOml1mjGQS8S9UaPmLARYs6CHOImX/G41ccj+IdAQ47DUVgHAA/stAXOCg3DapVKF63pIbawANVhu6YTFmOgHrpgTaT2GIkcZ0RBs7pq+Q=" />
+            <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
+        </form>
+    </div>
 </div>
 
 </body>
