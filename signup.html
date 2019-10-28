@@ -60,10 +60,24 @@
             </span>
         </div>
     </div>
+    <div class="row" id="confirmFirstNameErrorString" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Your name must only contain letters.</div>
+            </span>
+        </div>
+    </div>
     <div class="row" id="confirmLastNameError" hidden>
         <div class="form-group col-12">
             <span>
                 <div class="alert alert-danger" role="alert">Please enter last name.</div>
+            </span>
+        </div>
+    </div>
+    <div class="row" id="confirmLastNameErrorString" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Your name must only contain letters.</div>
             </span>
         </div>
     </div>
@@ -202,6 +216,13 @@
         <div class="form-group col-12">
             <span>
                 <div class="alert alert-danger" role="alert">Please Enter a city.</div>
+            </span>
+        </div>
+    </div>
+    <div class="row" id="cityErrorString" hidden>
+        <div class="form-group col-12">
+            <span>
+                <div class="alert alert-danger" role="alert">Your city must contain only letters.</div>
             </span>
         </div>
     </div>
@@ -348,8 +369,13 @@
         if (document.getElementById("firstNameInput").value == "") {
             document.getElementById("confirmFirstNameError").hidden = false;
             return false;
+        } else if (!document.getElementById("firstNameInput").value.match("^[a-zA-z]+$")) {
+            document.getElementById("confirmFirstNameErrorString").hidden = false;
+            console.log('test');
+            return false;
         }
         document.getElementById("confirmFirstNameError").hidden = true;
+        document.getElementById("confirmFirstNameErrorString").hidden = true;
         return true;
     }
 
@@ -357,8 +383,12 @@
         if (document.getElementById("lastNameInput").value == "") {
             document.getElementById("confirmLastNameError").hidden = false;
             return false;
+        } else if (!document.getElementById("lastNameInput").value.match("^[a-zA-z]+$")) {
+            document.getElementById("confirmLastNameErrorString").hidden = false;
+            return false;
         }
         document.getElementById("confirmLastNameError").hidden = true;
+        document.getElementById("confirmLastNameErrorString").hidden = true;
         return true;
     }
 
@@ -415,7 +445,11 @@
         if (document.getElementById("city").value == "") {
             document.getElementById("cityError").hidden = false;
             return false;
+        } else if (!document.getElementById("city").value.match("^[a-zA-z]+$")) {
+            document.getElementById("cityErrorString").hidden = false;
+            return false;
         }
+        document.getElementById("cityErrorString").hidden = true;
         document.getElementById("cityError").hidden = true;
         return true;
     }
