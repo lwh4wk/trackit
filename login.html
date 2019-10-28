@@ -34,7 +34,6 @@
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
             </ul>
         </div>
     </nav>
@@ -84,7 +83,7 @@
         xhrAccount.onload = function() {
             if (xhrAccount.status == 200) {
                 if (xhrAccount.responseText == "true") {
-                    document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
+                    window.location.href = "products.html";
                 } else {
                     document.getElementById("successMessage").innerHTML = xhrAccount.responseText;
                 }

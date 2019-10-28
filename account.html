@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <style>
+        li.nav-item {
+            text-color: white;
+            color: white;
+        }
+    </style>
+
+    <script>
+        function checkUser() {
+            let xhrUser = new XMLHttpRequest();
+            xhrUser.onload = function() {
+                if (xhrUser.status == 200) {
+                    if (xhrUser.responseText == "true") {
+                        document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"contact.html\">Contact Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"products.html\">Products</a></li>" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link active\" href=\"#\">Manage Account</a></li>" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\">Sign Out</a></li>";
+                    } else {
+                        window.location.href = "login.html";
+                    }
+                }
+            }
+            xhrUser.open('GET', 'checkUser.php', true);
+            xhrUser.send();
+        }
+    </script>
+</head>
+<body onload="checkUser(); account();" style="background-image: url('img/green.jpg'); background-repeat: no-repeat; background-size: cover;">
+<header>
+    <nav class="navbar navbar-dark navbar-expand bg-dark">
+        <h2 class="navbar-brand brand-name">
+            <a class="navbar-brand" href="index.html" style="max-width: 45%; padding: 0;"><img class="img-fluid" src="img/logo.png"></a>
+        </h2>
+
+        <div class="navbar-collapse justify-content-end">
+            <ul class="navbar-nav" id="navbar-list">
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="align-content-center justify-content-center container d-flex" id="name" style="padding-top: 2%"></div>
+
+<div class="align-content-center justify-content-center container d-flex" id="email"></div>
+
+<div class="align-content-center justify-content-center container d-flex" id="address"></div>
+
+<div class="align-content-center justify-content-center container d-flex">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Change Password
+    </button>
+</div>
+
+<div style="padding-top: 10px;" class="align-content-center justify-content-center container d-flex" id="passResponse"></div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button type="button" class="close" id="closeModal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Enter Current Password: </label>
+                        <input type="password" id="currentPassword" />
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label for="newPassword">Enter New Password: </label>
+                        <input type="password" id="newPassword"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPasswordConfirm">Confirm New Password: </label>
+                        <input type="password" id="newPasswordConfirm"/>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div style="padding: 5px;">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div style="padding: 5px;">
+                                <button type="button" id="saveBtn" class="btn btn-primary" onclick="changePassword()" disabled>Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function account() {
+        let xhrAccount = new XMLHttpRequest();
+        xhrAccount.onload = function() {
+            if (xhrAccount.status == 200) {
+                let infoArray = xhrAccount.responseText.split("^");
+                console.log("1" + xhrAccount.responseText);
+                document.getElementById('name').innerHTML = "" +
+                    "<div>" +
+                    "   <span>" +
+                    "       <div > <p class='lead'><strong>Name:</strong> " + infoArray[1].substring(1, infoArray[1].length-1) + " " + infoArray[2].substring(1, infoArray[2].length-1) + " </p></div>" +
+                    "   </span>" +
+                    "</div>";
+
+                document.getElementById('email').innerHTML = "" +
+                    "<div>" +
+                    "   <span>" +
+                    "       <div > <p class='lead'><strong>Email:</strong> " + infoArray[0].substring(1, infoArray[0].length-1) + " </p></div>" +
+                    "   </span>" +
+                    "</div>";
+
+                document.getElementById('address').innerHTML = "" +
+                    "<div>" +
+                    "   <span>" +
+                    "       <div > <p class='lead'><strong>Address:</strong> " + infoArray[3].substring(2, infoArray[3].length-2) + "<br> " + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + infoArray[4].substring(1, infoArray[4].length-1) +
+                    " " + infoArray[5].substring(1, infoArray[5].length-1) + " " + infoArray[6] + " </p></div>" +
+                    "   </span>" +
+                    "</div>";
+            }
+        }
+
+
+        xhrAccount.open('GET', 'account.php', true);
+        xhrAccount.send();
+    }
+
+    document.getElementById("currentPassword").oninput = function() {
+        checkEntered();
+    };
+    document.getElementById("newPassword").oninput = function() {
+        checkEntered();
+    };
+    document.getElementById("newPasswordConfirm").oninput = function() {
+        checkEntered();
+    };
+
+    function checkEntered() {
+        if (document.getElementById("currentPassword").value != '' && document.getElementById("newPassword").value != '') {
+            checkMatching();
+        } else {
+            document.getElementById("saveBtn").disabled = true;
+        }
+    }
+
+    function checkMatching() {
+        if (document.getElementById("newPassword").value == document.getElementById("newPasswordConfirm").value) {
+            document.getElementById("saveBtn").disabled = false;
+        } else {
+            document.getElementById("saveBtn").disabled = true;
+        }
+    }
+
+    function changePassword() {
+        var currentPass = document.getElementById("currentPassword").value;
+        document.getElementById("currentPassword").value = "";
+        var newPass = document.getElementById("newPassword").value;
+        document.getElementById("newPassword").value = "";
+
+        var changePasswordXhr = new XMLHttpRequest();
+
+        changePasswordXhr.onload = function () {
+            if (changePasswordXhr.status === 200) {
+                console.log(changePasswordXhr.responseText);
+                if (changePasswordXhr.responseText == "success") {
+                    document.getElementById("passResponse").innerHTML = "<p class=\"alert alert-success\" id=\"passSuccess\">Your password has successfully been changed.</p>";
+                } else {
+                    document.getElementById("passResponse").innerHTML = "<p class=\"alert alert-danger\" id=\"passError\">The password you entered doesn't match our records.</p>";
+                }
+                document.getElementById("closeModal").click();
+            }
+        }
+
+        changePasswordXhr.open('POST', 'changePassword.php', true);
+        changePasswordXhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        changePasswordXhr.send("current=" + currentPass + "&new=" + newPass);
+    }
+</script>
+
+</body>
+
+</html>

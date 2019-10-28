@@ -17,13 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
 
             $_SESSION['user'] = $email;
-
-            $_SESSION['time'] = $_SERVER['REQUEST_TIME'];
-            echo "<div class=\"form-group col-12\" style='padding-top: 3%;'>
-                    <span>
-                        <div class=\"alert alert-success\" role=\"alert\">Successfully Logged In.</div>
-                    </span>
-                    </div>";
+            echo "true";
         }
         else {
             echo "<div style=\"padding-top: 3%;\"><p class='alert alert-danger'>Username and password do not match our record.</p></div> <br/>";
