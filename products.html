@@ -24,20 +24,39 @@
             width: 50%;
         }
     </style>
+
+    <script>
+        function checkUser() {
+            let xhrUser = new XMLHttpRequest();
+            xhrUser.onload = function() {
+                if (xhrUser.status == 200) {
+                    if (xhrUser.responseText == "true") {
+                        document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"contact.html\">Contact Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link active\" href=\"#\">Products</a></li>" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"account.html\">Manage Account</a></li>" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\">Sign Out</a></li>";
+                    } else {
+                        document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"contact.html\">Contact Us</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"login.html\">Login</a></li>\n" +
+                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"signup.html\">Sign Up</a></li>\n";
+                    }
+                }
+            }
+            xhrUser.open('GET', 'checkUser.php', true);
+            xhrUser.send();
+        }
+    </script>
 </head>
-<body style="background-image: url('img/green.png'); background-repeat: no-repeat; background-size: cover;">
+<body style="background-image: url('img/green.png'); background-repeat: no-repeat; background-size: cover;" onload="checkUser()">
 <header>
     <nav class="navbar navbar-dark navbar-expand bg-dark">
         <h2 class="navbar-brand brand-name">
             <a class="navbar-brand" href="index.html" style="max-width: 45%; padding: 0;"><img class="img-fluid" src="img/logo.png"></a>
         </h2>
         <div class="navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">Products</a></li>
+            <ul class="navbar-nav" id="navbar-list">
             </ul>
         </div>
     </nav>
