@@ -15,7 +15,7 @@ try {
     $mail->Username = 'trackitsales@gmail.com';
     $mail->Password = 'Trackit123';
     $mail->setFrom('sender@example.com');
-    $mail->addAddress('lhyltoncs@gmail.com');
+    $mail->addAddress('jchenese@gmail.com');
     $mail->Subject = 'Subject';
     $mail->Body = 'body';
     $mail->send();
