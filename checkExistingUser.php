@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require("dbconnect.php");
     $user = htmlspecialchars($_POST['emailInput']);
 
-    $query = "SELECT * FROM user WHERE email='{" . $user . "}'";
+    $query = "SELECT * FROM users WHERE email='{" . $user . "}'";
     $statement = $db->prepare($query);
     $statement->execute();
 
