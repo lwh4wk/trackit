@@ -14,10 +14,10 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = 'trackitsales@gmail.com';
     $mail->Password = 'Trackit123';
-    $mail->setFrom('sender@example.com');
-    $mail->addAddress(substr($_SESSION['user']));
-    $mail->Subject = 'Subject';
-    $mail->Body = 'body';
+    $mail->setFrom('trackitsales@gmail.com');
+    $mail->addAddress($_SESSION['user']);
+    $mail->Subject = 'Succesfully Registered';
+    $mail->Body = 'Thank you for creating an account with us. To continue with the purchase of a subscription please visit https://trackit-cs4753.herokuapp.com and login.';
     $mail->send();
 } catch (Exception $e) {
     echo "Message could not be send. Mailer Error: {$mail->ErrorInfo}";
