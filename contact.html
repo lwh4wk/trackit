@@ -23,7 +23,6 @@
                         document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
                             "                <li class=\"nav-item\"><a class=\"nav-link active\" href=\"#\">Contact Us</a></li>\n" +
                             "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"products.html\">Products</a></li>" +
-                            "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"account.html\">Manage Account</a></li>" +
                             "                <li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\">Sign Out</a></li>";
                     } else {
                         document.getElementById("navbar-list").innerHTML = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"about.html\">About Us</a></li>\n" +
@@ -98,12 +97,17 @@
             <div align="center">
                 <button type="button" onclick="submitContact()" class="btn btn-primary" style="align-content: center">Submit</button>
             </div>
-            <div class="row" id="successMessage" style="padding-top: 2%;" hidden>
-                <div class="form-group col-12">
-            <span>
-                <div class="alert alert-success" role="alert">Successfully Submitted. You should receive a confirmation email within the next few minutes.</div>
-            </span>
+            <div class="form-row">
+                <div class="form-row col-3"></div>
+                <div class="form-row col-6" id="successMessage" style="padding-top: 2%;" hidden>
+                    <div class="form-group col-12">
+                <span>
+                    <div class="alert alert-success" role="alert">Successfully submitted. We will response to your request as soon as possible.</div>
+                </span>
+                    </div>
                 </div>
+                <div class="form-row col-3"></div>
+
             </div>
         </form>
     </div>
