@@ -59,7 +59,7 @@
     </nav>
 </header>
 
-<div  style="padding: 2%">
+<div  style="padding-top: 2%; padding-bottom: 10%;">
 
     <div class="container-fluid text-center">
         <h1 style="color: black;">Our Products</h1>
@@ -76,14 +76,16 @@
             <br>
         </div>
         <div class="text-center">
-            <h5 class="text-center" style="color: #4e555b" >5 USD</h5>
+            <h5 class="text-center" id="proPrice" style="color: #4e555b" >5 USD</h5>
             <br>
-            <form action="https://test.bitpay.com/checkout" method="post">
-                <input type="hidden" name="action" value="checkout" />
-                <input type="hidden" name="posData" value="" />
-                <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdxxkYCVg9+lKFwePybjtojs+94v40QqKlvAoMS4ozo79SHRQg+dTzuzZE5HTU8DUBRgF2uzyX6V2AB+WQcRNu+U1fnRaEfKh8VZzBrIhhDGM6foGj5GV1s7/J87VaMDYleyjJTdbFAJFEflyX1Gu1ka2sQacHQxYf4aV8YFjskRx3iWd9S18ujQkovJnZIPBKw=" />
-                <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
-            </form>
+            <div id="proCheckout">
+                <form action="https://test.bitpay.com/checkout" method="post">
+                    <input type="hidden" name="action" value="checkout" />
+                    <input type="hidden" name="posData" value="" />
+                    <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdxxkYCVg9+lKFwePybjtojs+94v40QqKlvAoMS4ozo79SHRQg+dTzuzZE5HTU8DUBRgF2uzyX6V2AB+WQcRNu+U1fnRaEfKh8VZzBrIhhDGM6foGj5GV1s7/J87VaMDYleyjJTdbFAJFEflyX1Gu1ka2sQacHQxYf4aV8YFjskRx3iWd9S18ujQkovJnZIPBKw=" />
+                    <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
+                </form>
+            </div>
             <br>
             <img class=" small-img" src="img/complete.jpg">
         </div>
@@ -96,20 +98,63 @@
             <h4 class="text-center">Manually enter in tracking numbers.</h4>
             <br>
             <div class="align-content-center text-center">
-                <h5 class="text-center" style="color: #4e555b" >1 USD</h5>
+                <h5 class="text-center" id="basicPrice" style="color: #4e555b" >1 USD</h5>
                 <br>
-                <form action="https://test.bitpay.com/checkout" method="post">
-                    <input type="hidden" name="action" value="checkout" />
-                    <input type="hidden" name="posData" value="" />
-                    <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdzoWRBaHV1WweyqAFSCqgpkVe7ImR1GbVMRKZVidX4VmbqzlTX39s0hzzDWq2eBVLxPNPO7T6KscBQ4pZvPA04cQuOml1mjGQS8S9UaPmLARYs6CHOImX/G41ccj+IdAQ47DUVgHAA/stAXOCg3DapVKF63pIbawANVhu6YTFmOgHrpgTaT2GIkcZ0RBs7pq+Q=" />
-                    <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
-                </form>
+                <div id="basicCheckout">
+                    <form action="https://test.bitpay.com/checkout" method="post">
+                        <input type="hidden" name="action" value="checkout" />
+                        <input type="hidden" name="posData" value="" />
+                        <input type="hidden" name="data" value="X5rjfTDJKeUslPBtyOQISoooC2CRlmUGqeC2/TYyJdzoWRBaHV1WweyqAFSCqgpkVe7ImR1GbVMRKZVidX4VmbqzlTX39s0hzzDWq2eBVLxPNPO7T6KscBQ4pZvPA04cQuOml1mjGQS8S9UaPmLARYs6CHOImX/G41ccj+IdAQ47DUVgHAA/stAXOCg3DapVKF63pIbawANVhu6YTFmOgHrpgTaT2GIkcZ0RBs7pq+Q=" />
+                        <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 210px" alt="BitPay, the easy way to pay with bitcoins.">
+                    </form>
+                </div>
                 <img class=" small-img" src="img/basic.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center text-center" >
+        <div class="col-4 justify-content-center">
+            <form class="container signup-box align-content-center" style="padding-top: 5%;">
+                <h3>Promo Codes: </h3>
+                <div class="form-check-inline">
+                    <input type="text" id="code" class="form-control" placeholder="Promo Code" />
+                    <input type="button" action="click" class="btn btn-primary" onclick="checkCoupon()" value="Apply Code" />
+                </div>
+            </form>
+            <div id="codeError" class="justify-content-center text-center" style="padding-top: 3%;" hidden>
+                <span>
+                    <div class="alert alert-danger" role="alert">Invalid Code.</div>
+                </span>
             </div>
         </div>
     </div>
 
 </div>
+
+<script>
+    function checkCoupon() {
+        let code = document.getElementById("code").value;
+        document.getElementById("code").value = "";
+        var xhrCode = new XMLHttpRequest();
+        xhrCode.onload = function() {
+            if (xhrCode.status == 200) {
+                if (xhrCode.responseText != "invalid") {
+                    let prices = xhrCode.responseText.split("**");
+                    document.getElementById("basicPrice").innerText = prices[0] + " USD";
+                    document.getElementById("proPrice").innerText = prices[1] + " USD";
+                    document.getElementById("basicCheckout").innerHTML = prices[2];
+                    document.getElementById("proCheckout").innerHTML = prices[3];
+                    document.getElementById("codeError").hidden = true;
+                } else {
+                    document.getElementById("codeError").hidden = false;
+                }
+            }
+        }
+        xhrCode.open('POST', 'checkCode.php', true);
+        xhrCode.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhrCode.send("code=" + code);
+    }
+</script>
 
 </body>
 </html>

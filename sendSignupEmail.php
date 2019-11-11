@@ -17,7 +17,7 @@ try {
     $mail->setFrom('trackitsales@gmail.com');
     $mail->addAddress($_SESSION['user']);
     $mail->Subject = 'Succesfully Registered';
-    $mail->Body = 'Thank you for creating an account with us. To continue with the purchase of a subscription please visit https://trackit-cs4753.herokuapp.com and login.';
+    $mail->Body = 'Thank you for creating an account with us. To continue with the purchase of a subscription please visit https://trackit-cs4753.herokuapp.com and login. Please use code FirstTime to get 20% when you sign up.';
     $mail->send();
 } catch (Exception $e) {
     echo "Message could not be send. Mailer Error: {$mail->ErrorInfo}";
